@@ -109,10 +109,10 @@ function Tomagachi() {
 
   const stats = {
     Hunger: {
-      level: 70
+      level: 10
     },
     Thirst: {
-      level: 30
+      level: 50
     },
     Happiness: {
       level: 90

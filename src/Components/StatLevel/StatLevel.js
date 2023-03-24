@@ -4,7 +4,9 @@ import React, { useEffect } from 'react'
 export default function StatLevel({title, level}) {
 
     useEffect(() => {
-        let stat = document.get
+        let stat = document.getElementById(`tomagachi--level--circle--${title}`)
+        const progress = 210 - (level /100)*210
+        stat.style.strokeDashoffset = progress
     }, [level])
 
     return (
@@ -21,7 +23,7 @@ export default function StatLevel({title, level}) {
                     <stop offset="100%" stopColor="#145AFF" />
                     </linearGradient>
                 </defs>
-                <circle id="tomagachi--level--circle" cx="42" cy="42" r="33" strokeLinecap="round" />
+                <circle id={`tomagachi--level--circle--${title}`} cx="42" cy="42" r="33" strokeLinecap="round" />
             </svg> 
         </div>
           

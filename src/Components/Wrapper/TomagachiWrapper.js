@@ -21,8 +21,6 @@ export default function TomagachiWrapper({ gif, handleGrowth, handlePlayerSelect
         setTempName(e.target.value)
     }
 
-    console.log(gif)
-
     useEffect(() => {
         if(gif.includes("Start")){
             setTextMessage(`Hi I am ${name}, I am a cyber creature who has traveled million of miles from its home planet

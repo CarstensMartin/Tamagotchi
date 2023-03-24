@@ -22,7 +22,7 @@
     font-size: 11px;
     font-weight: 700;
 }
-#tomagachi--level--circle{
+circle{
     fill: none;
     stroke: url(#GradientColor);
     stroke-width: 5px;
