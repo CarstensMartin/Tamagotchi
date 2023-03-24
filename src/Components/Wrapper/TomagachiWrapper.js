@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./TomagachiWrapper.css";
 import Bubble from "../../images/Bubble.png"
 import BunnyPlayer from "../../images/Players/Bunny.png"
 import PandaPlayer from "../../images/Players/Panda.png"
 import UnicornPlayer from "../../images/Players/Unicorn.png"
 
-export default function TomagachiWrapper({ gif, handleGrowth, handlePlayerSelector, isYoung, textMessage }) {
+export default function TomagachiWrapper({ gif, handleGrowth, handlePlayerSelector, isYoung, textMessage, name, setTextMessage }) {
 
     const [displayMessageNo, setDisplayMessageNo] = useState(0)
     const [tempName, setTempName] = useState("")
@@ -20,6 +20,16 @@ export default function TomagachiWrapper({ gif, handleGrowth, handlePlayerSelect
     const handlePlayerName = (e) => {
         setTempName(e.target.value)
     }
+
+    console.log(gif)
+
+    useEffect(() => {
+        if(gif.includes("Start")){
+            setTextMessage(`Hi I am ${name}, I am a cyber creature who has traveled million of miles from its home planet
+            to learn what life is like on planet earth`)
+        }
+        else{setTextMessage("")}
+    }, [gif])
 
     return (
         <div className="component-wrapper">

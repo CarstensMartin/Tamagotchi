@@ -109,22 +109,17 @@ function Tomagachi() {
 
   const stats = {
     Hunger: {
-      level: 90,
-      color: ""
+      level: 70
     },
     Thirst: {
-      level: 90,
-      color: ""
+      level: 30
     },
     Happiness: {
-      level: 90,
-      color: ""
+      level: 90
     },
     Energy: {
-      level: 90,
-      color: ""
+      level: 40
     },
-
   }
 
   useEffect(() => {
@@ -185,9 +180,12 @@ function Tomagachi() {
 
   const handlePlayerSelector = (type, playerName) => {
     console.log(type)
-    if (type !== player.type) {
+    if (type !== player.type && playerName !== "") {
       setActive_gif(gifs[type].start)
       setPlayer({name: playerName, type: type, isYoung: false}) 
+    }
+    else{
+      alert("Give me a name!!!")
     }
   }
 
@@ -206,7 +204,7 @@ function Tomagachi() {
         <>
           <div className='stat-level-wrapper'>
             {Object.keys(stats).map((key) => (
-              <StatLevel key={key} title={key} level={stats[key].level} color={stats[key].color} />
+              <StatLevel key={key} title={key} level={stats[key].level} />
             ))} 
           </div>
           
@@ -214,6 +212,8 @@ function Tomagachi() {
             gif={active_gif} 
             isYoung={player.isYoung}
             textMessage={textMessage}
+            setTextMessage={setTextMessage}
+            name={player.name}
           />
 
           <div className='buttons'>
