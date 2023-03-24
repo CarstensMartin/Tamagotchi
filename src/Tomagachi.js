@@ -71,6 +71,38 @@ function Tomagachi() {
     return [player, setPlayer];
   }
 
+  const useSemiPersistentStateForStats = () => {
+    const [hunger, setHunger] = useState( JSON.parse(localStorage.getItem('tomagachi-hunger')) || petFeeds.PetFed() )
+    const [thirst, setThirst] = useState( JSON.parse(localStorage.getItem('tomagachi-thirst')) || petDrinks.Thirsty())
+    const [happiness, setHappiness] = useState( JSON.parse(localStorage.getItem('tomagachi-happiness')) || petPlays.HappyPet())
+    const [energy, setEnergy] = useState( JSON.parse(localStorage.getItem('tomagachi-energy')) || petDance.Energy())
+
+    useEffect(() => {
+      localStorage.setItem('tomagachi-hunger', JSON.stringify(hunger));
+      petFeeds.SetPetHunger(hunger)
+    }, [hunger]);
+
+    useEffect(() => {
+      localStorage.setItem('tomagachi-thirst', JSON.stringify(thirst));
+      petDrinks.SetPetThirst(thirst)
+    }, [thirst]);
+
+    useEffect(() => {
+      localStorage.setItem('tomagachi-happiness', JSON.stringify(happiness));
+      petPlays.SetPetHappiness(happiness)
+    }, [happiness]);
+
+    useEffect(() => {
+      localStorage.setItem('tomagachi-energy', JSON.stringify(energy));
+      petSleeps.SetPetEnergy(energy)
+      petDance.SetPetEnergy(energy)
+      petPlays.SetPetEnergy(energy)
+    }, [energy]);
+
+    return [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy]
+
+  }
+
   const gifs = {
     egg: {
       unhatched: eggGIF,
@@ -118,10 +150,7 @@ function Tomagachi() {
   const [player, setPlayer] = useSemiPersistentState()
   const [active_gif, setActive_gif] = useState(gifs[player.type]?.start || gifs.egg.unhatched)
   const [textMessage, setTextMessage] = useState("")
-  const [hunger, setHunger] = useState(petFeeds.PetFed())
-  const [thirst, setThirst] = useState(petDrinks.Thirsty())
-  const [happiness, setHappiness] = useState(petPlays.HappyPet())
-  const [energy, setEnergy] = useState(petDance.Energy())
+  const [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy] = useSemiPersistentStateForStats()
 
   
 
