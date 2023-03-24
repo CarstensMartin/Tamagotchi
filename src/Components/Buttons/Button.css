@@ -1,0 +1,20 @@
+.button-wrapper{
+    height: 40px;
+    width: 55px;
+    background-color: #684CAA;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 5px;
+    box-shadow: 0 0 7px rgb(103, 103, 103);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.button-wrapper:hover{
+    background-color: #684CAA90;
+}

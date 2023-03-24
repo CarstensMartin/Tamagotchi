@@ -1,0 +1,58 @@
+.component-wrapper{
+    height: 150px;
+    display: flex;
+    justify-content: center;
+}
+.component-wrapper img{
+    height: 100%;   
+}
+
+.component-wrapper__text-display{
+    position: absolute;
+    top: -220px;
+    right: -220px;
+    width: 450px;
+    display: block;
+}
+.component-wrapper__text-display img{
+    width: 100%;
+    height: auto;   
+}
+.component-wrapper__text-display__text-wrapper{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-55%, -50%);
+    height: 60%;
+    width: 200px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+.component-wrapper__text-display__text-wrapper div{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.tomagachi-player-selector-wrapper{
+    display: flex;
+}
+.tomagachi-player-selector-wrapper div{
+    height: 50px;
+    width: 50px;
+    margin-right: 5px;
+    overflow: hidden;
+}
+.tomagachi-player-selector-wrapper .tomagachi-player-img{
+    height: 100%;
+    width: auto;
+    position: relative;
+    left: -20px;
+}
+.component-wrapper__text-display__text-wrapper__name-me{
+    background-color: #00B776;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+}
