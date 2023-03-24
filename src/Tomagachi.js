@@ -44,6 +44,18 @@ import { useEffect, useState } from 'react';
 import StatLevel from './Components/StatLevel/StatLevel';
 import Button from './Components/Buttons/Button';
 
+//Factory functions
+import PetDance from "./functions/dance";
+import PetDrinks from "./functions/drink";
+import PetFeeds from "./functions/feed";
+import PetPlays from "./functions/play";
+import PetSleeps from "./functions/sleep.js";
+
+let petDance = PetDance()
+let petDrinks = PetDrinks()
+let petFeeds = PetFeeds()
+let petPlays = PetPlays()
+let petSleeps = PetSleeps()
 
 function Tomagachi() {
 
@@ -106,21 +118,31 @@ function Tomagachi() {
   const [player, setPlayer] = useSemiPersistentState()
   const [active_gif, setActive_gif] = useState(gifs[player.type]?.start || gifs.egg.unhatched)
   const [textMessage, setTextMessage] = useState("")
+  const [hunger, setHunger] = useState(petFeeds.PetFed())
+  const [thirst, setThirst] = useState(petDrinks.Thirsty())
+  const [happiness, setHappiness] = useState(petPlays.HappyPet())
+  const [energy, setEnergy] = useState(petDance.Energy())
+
+  
 
   const stats = {
     Hunger: {
-      level: 10
+      level: hunger
     },
     Thirst: {
-      level: 50
+      level: thirst
     },
     Happiness: {
-      level: 90
+      level: happiness
     },
     Energy: {
-      level: 40
+      level: energy
     },
   }
+
+  useEffect(() => {
+
+  }, [])
 
   useEffect(() => {
     const img = document.querySelector('#tomagachi-gif')
@@ -219,7 +241,21 @@ function Tomagachi() {
           <div className='buttons'>
             {Object.keys(gifs[player.type]).map((key) => {
               if (key === "egg" || key === "eggHatched" || key === "eggHatching" || key === "start" || key === "startLow") return ""
-              return <Button key={key} title={key} handleChangeActiveGif={handleChangeActiveGif} />
+              return <Button 
+                          key={key} 
+                          title={key} 
+                          handleChangeActiveGif={handleChangeActiveGif} 
+                          petDance={petDance}
+                          petDrinks={petDrinks}
+                          petFeeds={petFeeds}
+                          petPlays={petPlays}
+                          petSleeps={petSleeps}
+                          setEnergy={setEnergy}
+                          setHappiness={setHappiness}
+                          setHunger={setHunger}
+                          setThirst={setThirst}
+                          setTextMessage={setTextMessage}
+                          />
             })}
           </div>
         </>
