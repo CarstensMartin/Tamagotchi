@@ -1,9 +1,9 @@
 const PetPlays = () =>{
-    let Happy = 15;
+    let Happy = 10;
     let Play = 10;
     let Hug = 5;
     let energy = 100;
-    let string = "I don't want to play"
+    let string = "Yey! I am happy you played with me!"
     const Playing = () =>{
         return (Happy/100) * 100;
     };

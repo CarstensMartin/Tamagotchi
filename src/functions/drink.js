@@ -13,7 +13,7 @@ const PetDrinks = () =>{
     }
 
     const Message = () =>{
-        return  Thirst <= 90 ? string : "I am not thirsty";
+        return  Thirst <= 90 ? string : "Thank you, I am not thirsty";
     }
 
     const SetPetThirst = (newThirst) => {

@@ -10,7 +10,7 @@ import sleepPandaGIF from "./gifs/Panda/Sleep.gif"
 import dancekPandaGIF from "./gifs/Panda/Dance.gif"
 import educatePandaGIF from "./gifs/Panda/Educate.gif"
 import startPandaGIF from "./gifs/Panda/Start.gif"
-import startLowHealthPandaGIF from "./gifs/Panda/StartLowHealth.gif"
+import startLowHealthPandaGIF from "./gifs/Panda/Low.gif"
 import playPandaGIF from "./gifs/Panda/Play.gif"
 
 //Bunny
@@ -23,7 +23,7 @@ import dancekBunnyGIF from "./gifs/Bunny/Dance.gif"
 import educateBunnyGIF from "./gifs/Bunny/Educate.gif"
 import startBunnyGIF from "./gifs/Bunny/Start.gif"
 import playBunnyGIF from "./gifs/Bunny/Play.gif"
-import startLowHealthBunnyGIF from "./gifs/Bunny/StartLowHealth.gif"
+import startLowHealthBunnyGIF from "./gifs/Bunny/Low.gif"
 
 //Unicorn
 import drinkUnicornGIF from "./gifs/Unicorn/Drink.gif"
@@ -35,7 +35,7 @@ import dancekUnicornGIF from "./gifs/Unicorn/Dance.gif"
 import educateUnicornGIF from "./gifs/Unicorn/Educate.gif"
 import startUnicornGIF from "./gifs/Unicorn/Start.gif"
 import playUnicornGIF from "./gifs/Unicorn/Play.gif"
-import startLowHealthUnicornGIF from "./gifs/Unicorn/StartLowHealth.gif"
+import startLowHealthUnicornGIF from "./gifs/Unicorn/Low.gif"
 
 //Audios
 import AskMp3 from './Audios/Effects/Ask.mp3'
@@ -76,6 +76,38 @@ let HugAudio = new Audio(HugMp3)
 let PlayAudio = new Audio(PlayMp3)
 let SleepSnoring2Audio = new Audio(SleepSnoring2Mp3)
 
+const useSemiPersistentStateForStats = () => {
+  const [hunger, setHunger] = useState( JSON.parse(localStorage.getItem('tomagachi-hunger')) || petFeeds.PetFed() )
+  const [thirst, setThirst] = useState( JSON.parse(localStorage.getItem('tomagachi-thirst')) || petDrinks.Thirsty())
+  const [happiness, setHappiness] = useState( JSON.parse(localStorage.getItem('tomagachi-happiness')) || petPlays.HappyPet())
+  const [energy, setEnergy] = useState( JSON.parse(localStorage.getItem('tomagachi-energy')) || petDance.Energy())
+
+  useEffect(() => {
+    localStorage.setItem('tomagachi-hunger', JSON.stringify(hunger));
+    petFeeds.SetPetHunger(hunger)
+  }, [hunger]);
+
+  useEffect(() => {
+    localStorage.setItem('tomagachi-thirst', JSON.stringify(thirst));
+    petDrinks.SetPetThirst(thirst)
+  }, [thirst]);
+
+  useEffect(() => {
+    localStorage.setItem('tomagachi-happiness', JSON.stringify(happiness));
+    petPlays.SetPetHappiness(happiness)
+  }, [happiness]);
+
+  useEffect(() => {
+    localStorage.setItem('tomagachi-energy', JSON.stringify(energy));
+    petSleeps.SetPetEnergy(energy)
+    petDance.SetPetEnergy(energy)
+    petPlays.SetPetEnergy(energy)
+  }, [energy]);
+
+  return [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy]
+
+}
+
 function Tomagachi() {
 
   const useSemiPersistentState = () => {
@@ -89,38 +121,8 @@ function Tomagachi() {
 
     return [player, setPlayer];
   }
-
-  const useSemiPersistentStateForStats = () => {
-    const [hunger, setHunger] = useState( JSON.parse(localStorage.getItem('tomagachi-hunger')) || petFeeds.PetFed() )
-    const [thirst, setThirst] = useState( JSON.parse(localStorage.getItem('tomagachi-thirst')) || petDrinks.Thirsty())
-    const [happiness, setHappiness] = useState( JSON.parse(localStorage.getItem('tomagachi-happiness')) || petPlays.HappyPet())
-    const [energy, setEnergy] = useState( JSON.parse(localStorage.getItem('tomagachi-energy')) || petDance.Energy())
-
-    useEffect(() => {
-      localStorage.setItem('tomagachi-hunger', JSON.stringify(hunger));
-      petFeeds.SetPetHunger(hunger)
-    }, [hunger]);
-
-    useEffect(() => {
-      localStorage.setItem('tomagachi-thirst', JSON.stringify(thirst));
-      petDrinks.SetPetThirst(thirst)
-    }, [thirst]);
-
-    useEffect(() => {
-      localStorage.setItem('tomagachi-happiness', JSON.stringify(happiness));
-      petPlays.SetPetHappiness(happiness)
-    }, [happiness]);
-
-    useEffect(() => {
-      localStorage.setItem('tomagachi-energy', JSON.stringify(energy));
-      petSleeps.SetPetEnergy(energy)
-      petDance.SetPetEnergy(energy)
-      petPlays.SetPetEnergy(energy)
-    }, [energy]);
-
-    return [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy]
-
-  }
+ 
+  
 
   const gifs = {
     egg: {
@@ -167,11 +169,12 @@ function Tomagachi() {
   }
 
   const [player, setPlayer] = useSemiPersistentState()
-  const [active_gif, setActive_gif] = useState(gifs[player.type]?.start || gifs.egg.unhatched)
+  let [active_gif, setActive_gif] = useState(gifs[player.type]?.start || gifs.egg.unhatched)
   const [textMessage, setTextMessage] = useState("")
   const [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy] = useSemiPersistentStateForStats()
-
   const [CurrentAudio, setCurrentAudio] = useState(new Audio())
+
+ 
 
   const stats = {
     Hunger: {
@@ -187,6 +190,24 @@ function Tomagachi() {
       level: energy
     },
   }
+
+  const cvTips = [
+    "Tailor your CV to the position that you are applying for.",
+    "Choose the correct CV format for the position.",
+    "Create a neat and tidy CV layout.",
+    "Use the right CV length, generally 1 to 2 pages.",
+    "Don't include unnecessary information in your CV.",
+    "Make a CV header that stands out.",
+    "Use a sensible email address based on your name, funny and quirky addresses are not advised for the job market.",
+    "Include a clickable URL with your LinkedIn profile and other social media handles.",
+    "Have a compelling about section that summarises you in 3 to 5 lines.",
+    "Perfect your work experience section with result-driven outcomes.",
+    "Remember to include a section for your education.",
+    "Leverage your skills section. Make sure you match your own skill set to the job description.",
+    "Save your CV in the right format.",
+    "Thoroughly proofread your CV and make use of tools like Grammarly.",
+    "Write a cover letter to accompany your CV."
+  ]
   
   let myIntervalHunger = setInterval(() => {
     if(stats.Hunger.level > 0){
@@ -199,7 +220,7 @@ function Tomagachi() {
 
   let myIntervalThirst = setInterval(() => {
     if(stats.Thirst.level > 0){
-        setHunger(stats.Thirst.level -= 5);
+        setThirst(stats.Thirst.level -= 5);
       }
       else{
         clearInterval(myIntervalThirst)
@@ -208,7 +229,7 @@ function Tomagachi() {
 
   let myIntervalHappiness = setInterval(() => {
     if(stats.Happiness.level > 0){
-        setHunger(stats.Happiness.level -= 5);
+        setHappiness(stats.Happiness.level -= 5);
       }
       else{
         clearInterval(myIntervalHappiness)
@@ -221,6 +242,13 @@ function Tomagachi() {
       return false;
     };
   }, [])
+
+    if ((stats.Hunger.level <= 0 || stats.Thirst.level <= 0 || stats.Happiness.level <= 0 || stats.Energy.level <= 0)&& player.type.length >0 ){
+    console.log(active_gif)
+
+    active_gif =(gifs[player.type].startLow);
+
+    }
 
   const handleGrowth = () => {
     if (active_gif === gifs.egg.unhatched) {
@@ -336,7 +364,7 @@ function Tomagachi() {
                           PlayAudio={PlayAudio}
                           CurrentAudio={CurrentAudio}
                           setCurrentAudio={setCurrentAudio}
-
+                          cvTips={cvTips}
                           />
             })}
           </div>

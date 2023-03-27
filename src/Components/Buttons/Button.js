@@ -23,20 +23,25 @@ export default function Button({
   PlayAudio,
   HugAudio,
   CurrentAudio,
-  setCurrentAudio
+  setCurrentAudio,
+  cvTips
 }) {
   title = `${title.charAt(0).toUpperCase()}${title.slice(1)}`;
 
   const handleButtonClick = () => {
-    handleChangeActiveGif(title.toLowerCase());
+
+    handleChangeActiveGif(title.toLowerCase())
 
     switch (title) {
       case "Dance":
-        petDance.SimulateDance();
-        setEnergy(petDance.Energy())
+        console.log(petDance.Energy());
+        if(petDance.Energy() >= 0){
+          petDance.SimulateDance()
+        }
+        setEnergy(petDance.Energy());
         CurrentAudio.pause()
         DanceAudio.play()
-        setCurrentAudio(DanceAudio)
+        setCurrentAudio(DanceAudio) 
         break;
 
       case "Hug":
@@ -49,15 +54,29 @@ export default function Button({
 
       case "Feed":
         petFeeds.SimulateFeed()
-        setHunger(petFeeds.PetFed())
+        if (typeof petFeeds.SimulateFeed() === "string"){
+          setTextMessage(petFeeds.SimulateFeed())
+        }  
+        else{
+          setHunger(petFeeds.SimulateFeed())
+        }
+        
         CurrentAudio.pause()
         FeedAudio.play()
         setCurrentAudio(FeedAudio)
+        console.log(petFeeds.PetFed())
         break;
 
       case "Drink":
         petDrinks.SimulateDrink()
-        setThirst(petDrinks.Thirsty())
+        
+        if (typeof petDrinks.SimulateDrink() === "string"){
+          setTextMessage(petDrinks.SimulateDrink())
+        }  
+        else{
+          setHunger(petDrinks.SimulateDrink())
+        }
+
         CurrentAudio.pause()
         DrinkAudio.play()
         setCurrentAudio(DrinkAudio)
@@ -72,6 +91,7 @@ export default function Button({
 
       case "Educate":
 
+        setTextMessage(cvTips[Math.floor(Math.random() * 15)])
         CurrentAudio.pause()
         EducateAudio.play()
         setCurrentAudio(EducateAudio)

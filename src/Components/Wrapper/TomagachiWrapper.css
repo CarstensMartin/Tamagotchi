@@ -1,5 +1,5 @@
 .component-wrapper{
-    height: 150px;
+    height: 200px;
     display: flex;
     justify-content: center;
 }
@@ -9,8 +9,8 @@
 
 .component-wrapper__text-display{
     position: absolute;
-    top: -220px;
-    right: -220px;
+    top: -200px;
+    right: -280px;
     width: 450px;
     display: block;
 }

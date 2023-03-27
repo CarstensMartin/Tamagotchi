@@ -1,13 +1,13 @@
 const PetFeeds = () =>{
-    let Hunger = 90;
+    let Hunger = 0;
     let Feed = 5;
-    let string = 'I am full';
+    let string = 'Thank you, I am not hungry';
     const Feeding = () =>{
         return (Hunger/100) * 100;
     }
 
     const SimulateFeed = () =>{
-        return (Hunger <= 90 && Hunger > 0) ? Hunger -= Feed : string
+        return (Hunger <= 95 && Hunger >= 0) ? Hunger += Feed : string
     }
 
     const PetFed = () =>{
