@@ -7,7 +7,7 @@ const PetFeeds = () =>{
     }
 
     const SimulateFeed = () =>{
-        return Hunger <= 90 ? Hunger -= Feed : string
+        return (Hunger <= 90 && Hunger > 0) ? Hunger -= Feed : string
     }
 
     const PetFed = () =>{

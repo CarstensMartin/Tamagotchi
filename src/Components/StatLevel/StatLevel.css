@@ -28,6 +28,7 @@ circle{
     stroke-width: 5px;
     stroke-dasharray: 210;
     stroke-dashoffset: 0;
+    transition: 1s linear;
 }
 svg{
     position: absolute;

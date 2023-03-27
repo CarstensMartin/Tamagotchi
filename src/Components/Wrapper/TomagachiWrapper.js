@@ -26,7 +26,14 @@ export default function TomagachiWrapper({ gif, handleGrowth, handlePlayerSelect
             setTextMessage(`Hi I am ${name}, I am a cyber creature who has traveled million of miles from my home planet
             to learn what life is like on planet earth`)
         }
-        else{setTextMessage("")}
+        else{
+            try{
+                setTextMessage("")
+            }
+            catch(TypeError){
+            }
+            
+        }
     }, [gif])
 
     return (

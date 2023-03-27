@@ -37,6 +37,16 @@ import startUnicornGIF from "./gifs/Unicorn/Start.gif"
 import playUnicornGIF from "./gifs/Unicorn/Play.gif"
 import startLowHealthUnicornGIF from "./gifs/Unicorn/StartLowHealth.gif"
 
+//Audios
+import AskMp3 from './Audios/Effects/Ask.mp3'
+import DanceMp3 from './Audios/Effects/Dance.mp3'
+import DrinkMp3 from './Audios/Effects/Drink.mp3'
+import EducateMp3 from './Audios/Effects/Educate.mp3'
+import FeedMp3 from './Audios/Effects/Feed.mp3'
+import HugMp3 from './Audios/Effects/Hug.mp3'
+import PlayMp3 from './Audios/Effects/Play.mp3'
+import SleepSnoring2Mp3 from './Audios/Effects/Sleep-Snoring2.mp3'
+
 import eggGIF from "./gifs/Egg/Egg.gif"
 import eggHatchedGIF from "./gifs/Egg/Egg-Hatched.gif"
 import eggHatchingGIF from "./gifs/Egg/Egg-Hatching.gif"
@@ -56,6 +66,15 @@ let petDrinks = PetDrinks()
 let petFeeds = PetFeeds()
 let petPlays = PetPlays()
 let petSleeps = PetSleeps()
+
+let AskAudio = new Audio(AskMp3)
+let DanceAudio = new Audio(DanceMp3)
+let DrinkAudio = new Audio(DrinkMp3)
+let EducateAudio = new Audio(EducateMp3)
+let FeedAudio = new Audio(FeedMp3)
+let HugAudio = new Audio(HugMp3)
+let PlayAudio = new Audio(PlayMp3)
+let SleepSnoring2Audio = new Audio(SleepSnoring2Mp3)
 
 function Tomagachi() {
 
@@ -152,7 +171,7 @@ function Tomagachi() {
   const [textMessage, setTextMessage] = useState("")
   const [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy] = useSemiPersistentStateForStats()
 
-  
+  const [CurrentAudio, setCurrentAudio] = useState(new Audio())
 
   const stats = {
     Hunger: {
@@ -168,10 +187,33 @@ function Tomagachi() {
       level: energy
     },
   }
+  
+  let myIntervalHunger = setInterval(() => {
+    if(stats.Hunger.level > 0){
+        setHunger(stats.Hunger.level -= 5);
+      }
+      else{
+        clearInterval(myIntervalHunger)
+      }
+  }, 60000)
 
-  useEffect(() => {
+  let myIntervalThirst = setInterval(() => {
+    if(stats.Thirst.level > 0){
+        setHunger(stats.Thirst.level -= 5);
+      }
+      else{
+        clearInterval(myIntervalThirst)
+      }
+  }, 60000)
 
-  }, [])
+  let myIntervalHappiness = setInterval(() => {
+    if(stats.Happiness.level > 0){
+        setHunger(stats.Happiness.level -= 5);
+      }
+      else{
+        clearInterval(myIntervalHappiness)
+      }
+  }, 120000)
 
   useEffect(() => {
     const img = document.querySelector('#tomagachi-gif')
@@ -284,6 +326,17 @@ function Tomagachi() {
                           setHunger={setHunger}
                           setThirst={setThirst}
                           setTextMessage={setTextMessage}
+                          AskAudio={AskAudio}
+                          DanceAudio={DanceAudio}
+                          HugAudio={HugAudio}
+                          FeedAudio={FeedAudio}
+                          DrinkAudio={DrinkAudio}
+                          EducateAudio={EducateAudio}
+                          SleepSnoring2Audio={SleepSnoring2Audio}
+                          PlayAudio={PlayAudio}
+                          CurrentAudio={CurrentAudio}
+                          setCurrentAudio={setCurrentAudio}
+
                           />
             })}
           </div>
