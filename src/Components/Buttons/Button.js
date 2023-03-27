@@ -34,7 +34,6 @@ export default function Button({
 
     switch (title) {
       case "Dance":
-        console.log(petDance.Energy());
         if(petDance.Energy() >= 0){
           petDance.SimulateDance()
         }
@@ -64,7 +63,6 @@ export default function Button({
         CurrentAudio.pause()
         FeedAudio.play()
         setCurrentAudio(FeedAudio)
-        console.log(petFeeds.PetFed())
         break;
 
       case "Drink":
