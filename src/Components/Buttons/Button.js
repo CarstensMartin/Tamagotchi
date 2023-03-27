@@ -72,7 +72,7 @@ export default function Button({
           setTextMessage(petDrinks.SimulateDrink())
         }  
         else{
-          setHunger(petDrinks.SimulateDrink())
+          setThirst(petDrinks.SimulateDrink())
         }
 
         CurrentAudio.pause()

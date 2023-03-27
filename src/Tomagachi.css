@@ -6,12 +6,7 @@
   max-width: 300px;
   border-radius: 20px;
 }
-.Tomagachi-wrapper{
-  display: none;
-}
-.show-hide{
-  display: block;
-}
+
 .buttons{
   display: flex;
   flex-flow: row wrap;
@@ -36,7 +31,6 @@
   right: -120px;
   bottom: 150px;
   cursor: pointer;
-  display: none;
 }
 .Tomagachi-wrapper__hide-show-button img{
   width: 100%;
@@ -49,11 +43,4 @@
   padding: 5px;
   border-radius: 10px;
   box-shadow:  0 0 7px rgb(103, 103, 103);
-}
-
-@media (max-width: 1280px){
-  .Tomagachi-wrapper__hide-show-button{
-    display: block;
-  }
-
 }

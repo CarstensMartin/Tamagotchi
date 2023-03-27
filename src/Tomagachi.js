@@ -47,13 +47,16 @@ import HugMp3 from './Audios/Effects/Hug.mp3'
 import PlayMp3 from './Audios/Effects/Play.mp3'
 import SleepSnoring2Mp3 from './Audios/Effects/Sleep-Snoring2.mp3'
 
+//Heart
+import heart from './gifs/Heart/HeartFlashes.gif'
+
 import eggGIF from "./gifs/Egg/Egg.gif"
 import eggHatchedGIF from "./gifs/Egg/Egg-Hatched.gif"
 import eggHatchingGIF from "./gifs/Egg/Egg-Hatching.gif"
 import { useEffect, useState } from 'react';
 import StatLevel from './Components/StatLevel/StatLevel';
 import Button from './Components/Buttons/Button';
-import heart from './gifs/Heart.gif'
+
 
 //Factory functions
 import PetDance from "./functions/dance";
@@ -172,7 +175,7 @@ function Tomagachi() {
   const [textMessage, setTextMessage] = useState("")
   const [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy] = useSemiPersistentStateForStats()
   const [CurrentAudio, setCurrentAudio] = useState(new Audio())
-  const [isTogamachVissible, SetisTogamachVissible] = useState(true)
+  const [isTogamachVissible, SetisTogamachVissible] = useState(false)
 
   const stats = {
     Hunger: {
@@ -235,21 +238,16 @@ function Tomagachi() {
   }, 120000)
 
   useEffect(() => {
-    const img = document.querySelector('#tomagachi-gif')
-    img.ondragstart = () => {
-      return false;
-    };
-
-    const heartButton = document.getElementById("Tomagachi-wrapper__hide-show-button")
-    let tomagatchiClass = document.getElementById("Tomagachi-wrapper")
-    heartButton.addEventListener("click", () => {
-      tomagatchiClass.style.display = "block"
-    })
-  }, [])
+    if (isTogamachVissible){
+      const img = document.querySelector('#tomagachi-gif')
+      img.ondragstart = () => {
+        return false;
+      }
+    }
+  }, [isTogamachVissible])
 
   if ((stats.Hunger.level <= 0 || stats.Thirst.level <= 0 || stats.Happiness.level <= 0 || stats.Energy.level <= 0)&& player.type.length >0 ){
     active_gif =(gifs[player.type].startLow);
-
   }
 
   const handleGrowth = () => {
@@ -301,6 +299,10 @@ function Tomagachi() {
     }
   }
 
+  const HandleTogamachVissible = () => {
+    isTogamachVissible ? SetisTogamachVissible(false) : SetisTogamachVissible(true)
+  }
+
   const handlePlayerSelector = (type, playerName) => {
     if (type !== player.type && playerName !== "") {
       setActive_gif(gifs[type].start)
@@ -313,7 +315,9 @@ function Tomagachi() {
 
   return (
     <div className='Tomagachi-wrapper__parent'>
-      <div className="Tomagachi-wrapper" id='Tomagachi-wrapper'>
+
+      {isTogamachVissible ? 
+        <div className="Tomagachi-wrapper" id='Tomagachi-wrapper'>
         {(player.isYoung || player.name==="") ?
           <>
             <TomagachiWrapper
@@ -371,11 +375,19 @@ function Tomagachi() {
               })}
             </div>
           </>
-        
-        }
 
-      </div>
-      <div className='Tomagachi-wrapper__hide-show-button' id='Tomagachi-wrapper__hide-show-button'>
+        }
+        <a href='https://sapho-sys.github.io/tamagotchi_logic/' target="_blank">
+          <div className='tests-button-wrapper'>
+            <span>Tests</span>
+          </div>
+        </a>
+
+        </div>
+        : ""
+      }
+
+      <div className='Tomagachi-wrapper__hide-show-button' onClick={HandleTogamachVissible}>
         <img src={heart} alt="gif" />
       </div>
         
