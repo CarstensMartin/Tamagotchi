@@ -47,8 +47,9 @@ import HugMp3 from './Audios/Effects/Hug.mp3'
 import PlayMp3 from './Audios/Effects/Play.mp3'
 import SleepSnoring2Mp3 from './Audios/Effects/Sleep-Snoring2.mp3'
 
-//Heart
-import heart from './gifs/Heart/HeartFlashes.gif'
+//ShowHide
+import heart from './gifs/ShowHide/HeartFlashes.gif'
+import ArrowLeft from "./gifs/ShowHide/ArrowLeft.gif"
 
 import eggGIF from "./gifs/Egg/Egg.gif"
 import eggHatchedGIF from "./gifs/Egg/Egg-Hatched.gif"
@@ -56,7 +57,6 @@ import eggHatchingGIF from "./gifs/Egg/Egg-Hatching.gif"
 import { useEffect, useState } from 'react';
 import StatLevel from './Components/StatLevel/StatLevel';
 import Button from './Components/Buttons/Button';
-
 
 //Factory functions
 import PetDance from "./functions/dance";
@@ -84,9 +84,9 @@ function Tomagachi() {
 
   const useSemiPersistentState = () => {
     const [player, setPlayer] = useState(
-      JSON.parse(localStorage.getItem('tomagachi')) || {name: "", type: "", isYoung: true}
+      JSON.parse(localStorage.getItem('tomagachi')) || { name: "", type: "", isYoung: true }
     );
-   
+
     useEffect(() => {
       localStorage.setItem('tomagachi', JSON.stringify(player));
     }, [player]);
@@ -95,35 +95,35 @@ function Tomagachi() {
   }
 
   const useSemiPersistentStateForStats = () => {
-    const [hunger, setHunger] = useState( JSON.parse(localStorage.getItem('tomagachi-hunger')) || petFeeds.PetFed() )
-    const [thirst, setThirst] = useState( JSON.parse(localStorage.getItem('tomagachi-thirst')) || petDrinks.Thirsty())
-    const [happiness, setHappiness] = useState( JSON.parse(localStorage.getItem('tomagachi-happiness')) || petPlays.HappyPet())
-    const [energy, setEnergy] = useState( JSON.parse(localStorage.getItem('tomagachi-energy')) || petDance.Energy())
-  
+    const [hunger, setHunger] = useState(JSON.parse(localStorage.getItem('tomagachi-hunger')) || petFeeds.PetFed())
+    const [thirst, setThirst] = useState(JSON.parse(localStorage.getItem('tomagachi-thirst')) || petDrinks.Thirsty())
+    const [happiness, setHappiness] = useState(JSON.parse(localStorage.getItem('tomagachi-happiness')) || petPlays.HappyPet())
+    const [energy, setEnergy] = useState(JSON.parse(localStorage.getItem('tomagachi-energy')) || petDance.Energy())
+
     useEffect(() => {
       localStorage.setItem('tomagachi-hunger', JSON.stringify(hunger));
       petFeeds.SetPetHunger(hunger)
     }, [hunger]);
-  
+
     useEffect(() => {
       localStorage.setItem('tomagachi-thirst', JSON.stringify(thirst));
       petDrinks.SetPetThirst(thirst)
     }, [thirst]);
-  
+
     useEffect(() => {
       localStorage.setItem('tomagachi-happiness', JSON.stringify(happiness));
       petPlays.SetPetHappiness(happiness)
     }, [happiness]);
-  
+
     useEffect(() => {
       localStorage.setItem('tomagachi-energy', JSON.stringify(energy));
       petSleeps.SetPetEnergy(energy)
       petDance.SetPetEnergy(energy)
       petPlays.SetPetEnergy(energy)
     }, [energy]);
-  
+
     return [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy]
-  
+
   }
 
   const gifs = {
@@ -209,36 +209,36 @@ function Tomagachi() {
     "Thoroughly proofread your CV and make use of tools like Grammarly.",
     "Write a cover letter to accompany your CV."
   ]
-  
+
   let myIntervalHunger = setInterval(() => {
-    if(stats.Hunger.level > 0){
-        setHunger(stats.Hunger.level -= 5);
-      }
-      else{
-        clearInterval(myIntervalHunger)
-      }
+    if (stats.Hunger.level > 0) {
+      setHunger(stats.Hunger.level -= 5);
+    }
+    else {
+      clearInterval(myIntervalHunger)
+    }
   }, 60000)
 
   let myIntervalThirst = setInterval(() => {
-    if(stats.Thirst.level > 0){
-        setThirst(stats.Thirst.level -= 5);
-      }
-      else{
-        clearInterval(myIntervalThirst)
-      }
+    if (stats.Thirst.level > 0) {
+      setThirst(stats.Thirst.level -= 5);
+    }
+    else {
+      clearInterval(myIntervalThirst)
+    }
   }, 60000)
 
   let myIntervalHappiness = setInterval(() => {
-    if(stats.Happiness.level > 0){
-        setHappiness(stats.Happiness.level -= 5);
-      }
-      else{
-        clearInterval(myIntervalHappiness)
-      }
+    if (stats.Happiness.level > 0) {
+      setHappiness(stats.Happiness.level -= 5);
+    }
+    else {
+      clearInterval(myIntervalHappiness)
+    }
   }, 120000)
 
   useEffect(() => {
-    if (isTogamachVissible){
+    if (isTogamachVissible) {
       const img = document.querySelector('#tomagachi-gif')
       img.ondragstart = () => {
         return false;
@@ -246,8 +246,8 @@ function Tomagachi() {
     }
   }, [isTogamachVissible])
 
-  if ((stats.Hunger.level <= 0 || stats.Thirst.level <= 0 || stats.Happiness.level <= 0 || stats.Energy.level <= 0)&& player.type.length >0 ){
-    active_gif =(gifs[player.type].startLow);
+  if ((stats.Hunger.level <= 0 || stats.Thirst.level <= 0 || stats.Happiness.level <= 0 || stats.Energy.level <= 0) && player.type.length > 0) {
+    active_gif = (gifs[player.type].startLow);
   }
 
   const handleGrowth = () => {
@@ -292,7 +292,7 @@ function Tomagachi() {
       case "play":
         setActive_gif(gifs[player.type].play)
         break;
-  
+
       default:
         setActive_gif(gifs[player.type].sleep)
         break;
@@ -306,92 +306,97 @@ function Tomagachi() {
   const handlePlayerSelector = (type, playerName) => {
     if (type !== player.type && playerName !== "") {
       setActive_gif(gifs[type].start)
-      setPlayer({name: playerName, type: type, isYoung: false}) 
+      setPlayer({ name: playerName, type: type, isYoung: false })
     }
-    else{
+    else {
       alert("Give me a name!!!")
     }
   }
 
   return (
-    <div className='Tomagachi-wrapper__parent'>
+    <>
+      <div className='Tomagachi-wrapper__parent'>
 
-      {isTogamachVissible ? 
-        <div className="Tomagachi-wrapper" id='Tomagachi-wrapper'>
-        {(player.isYoung || player.name==="") ?
-          <>
-            <TomagachiWrapper
-              gif={active_gif}
-              handleGrowth={handleGrowth}
-              handlePlayerSelector={handlePlayerSelector}
-              isYoung={player.isYoung}
-            />
-          </>
-          :
-          <>
-            <div className='stat-level-wrapper'>
-              {Object.keys(stats).map((key) => (
-                <StatLevel key={key} title={key} level={stats[key].level} />
-              ))} 
-            </div>
-            
-            <TomagachiWrapper 
-              gif={active_gif} 
-              isYoung={player.isYoung}
-              textMessage={textMessage}
-              setTextMessage={setTextMessage}
-              name={player.name}
-            />
+        {isTogamachVissible ?
+          <div className="Tomagachi-wrapper" id='Tomagachi-wrapper'>
+            {(player.isYoung || player.name === "") ?
+              <>
+                <TomagachiWrapper
+                  gif={active_gif}
+                  handleGrowth={handleGrowth}
+                  handlePlayerSelector={handlePlayerSelector}
+                  isYoung={player.isYoung}
+                />
+              </>
+              :
+              <>
+                <div className='stat-level-wrapper'>
+                  {Object.keys(stats).map((key) => (
+                    <StatLevel key={key} title={key} level={stats[key].level} />
+                  ))}
+                </div>
 
-            <div className='buttons'>
-              {Object.keys(gifs[player.type]).map((key) => {
-                if (key === "egg" || key === "eggHatched" || key === "eggHatching" || key === "start" || key === "startLow") return ""
-                return <Button 
-                          key={key} 
-                          title={key} 
-                          handleChangeActiveGif={handleChangeActiveGif} 
-                          petDance={petDance}
-                          petDrinks={petDrinks}
-                          petFeeds={petFeeds}
-                          petPlays={petPlays}
-                          petSleeps={petSleeps}
-                          setEnergy={setEnergy}
-                          setHappiness={setHappiness}
-                          setHunger={setHunger}
-                          setThirst={setThirst}
-                          setTextMessage={setTextMessage}
-                          AskAudio={AskAudio}
-                          DanceAudio={DanceAudio}
-                          HugAudio={HugAudio}
-                          FeedAudio={FeedAudio}
-                          DrinkAudio={DrinkAudio}
-                          EducateAudio={EducateAudio}
-                          SleepSnoring2Audio={SleepSnoring2Audio}
-                          PlayAudio={PlayAudio}
-                          CurrentAudio={CurrentAudio}
-                          setCurrentAudio={setCurrentAudio}
-                          cvTips={cvTips}
-                          />
-              })}
-            </div>
-          </>
+                <TomagachiWrapper
+                  gif={active_gif}
+                  isYoung={player.isYoung}
+                  textMessage={textMessage}
+                  setTextMessage={setTextMessage}
+                  name={player.name}
+                />
 
-        }
-        <a href='https://sapho-sys.github.io/tamagotchi_logic/' target="_blank">
-          <div className='tests-button-wrapper'>
-            <span>Tests</span>
+                <div className='buttons'>
+                  {Object.keys(gifs[player.type]).map((key) => {
+                    if (key === "egg" || key === "eggHatched" || key === "eggHatching" || key === "start" || key === "startLow") return ""
+                    return <Button
+                      key={key}
+                      title={key}
+                      handleChangeActiveGif={handleChangeActiveGif}
+                      petDance={petDance}
+                      petDrinks={petDrinks}
+                      petFeeds={petFeeds}
+                      petPlays={petPlays}
+                      petSleeps={petSleeps}
+                      setEnergy={setEnergy}
+                      setHappiness={setHappiness}
+                      setHunger={setHunger}
+                      setThirst={setThirst}
+                      setTextMessage={setTextMessage}
+                      AskAudio={AskAudio}
+                      DanceAudio={DanceAudio}
+                      HugAudio={HugAudio}
+                      FeedAudio={FeedAudio}
+                      DrinkAudio={DrinkAudio}
+                      EducateAudio={EducateAudio}
+                      SleepSnoring2Audio={SleepSnoring2Audio}
+                      PlayAudio={PlayAudio}
+                      CurrentAudio={CurrentAudio}
+                      setCurrentAudio={setCurrentAudio}
+                      cvTips={cvTips}
+                    />
+                  })}
+                </div>
+              </>
+
+            }
+
+
           </div>
-        </a>
+          : ""
+        }
 
+        <div className='Tomagachi-wrapper__hide-show-button' onClick={HandleTogamachVissible}>
+          <img src={isTogamachVissible ? ArrowLeft : heart} alt="gif" />
         </div>
-        : ""
-      }
 
-      <div className='Tomagachi-wrapper__hide-show-button' onClick={HandleTogamachVissible}>
-        <img src={heart} alt="gif" />
       </div>
-        
-    </div>
+
+      <a href="./test.html" target="_blank">
+        <div className='tests-button-wrapper'>
+          <span>Tests</span>
+        </div>
+      </a>
+    </>
+
   );
 }
 
