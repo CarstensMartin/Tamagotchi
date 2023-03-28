@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./TomagachiWrapper.css";
+import "./TamagotchiWrapper.css";
 import Bubble from "../../images/Bubble.png"
 import BunnyPlayer from "../../images/Players/Bunny.png"
 import PandaPlayer from "../../images/Players/Panda.png"
 import UnicornPlayer from "../../images/Players/Unicorn.png"
 
-export default function TomagachiWrapper({ gif, handleGrowth, handlePlayerSelector, isYoung, textMessage, name, setTextMessage }) {
+export default function TamagotchiWrapper({ gif, handleGrowth, handlePlayerSelector, isYoung, textMessage, name, setTextMessage }) {
 
     const [displayMessageNo, setDisplayMessageNo] = useState(0)
     const [tempName, setTempName] = useState("")

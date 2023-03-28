@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import './Tomagachi.css';
-import TomagachiWrapper from './Components/Wrapper/TomagachiWrapper'
+import './Tamagotchi.css';
+import TamagotchiWrapper from './Components/Wrapper/TamagotchiWrapper'
 import StatLevel from './Components/StatLevel/StatLevel';
 import Button from './Components/Buttons/Button';
 import askSnippet from "./images/askSnippet.png"
@@ -331,7 +331,7 @@ function Tomagachi() {
           <div className="Tomagachi-wrapper" id='Tomagachi-wrapper'>
             {(player.isYoung || player.name === "") ?
               <>
-                <TomagachiWrapper
+                <TamagotchiWrapper
                   gif={active_gif}
                   handleGrowth={handleGrowth}
                   handlePlayerSelector={handlePlayerSelector}
@@ -346,7 +346,7 @@ function Tomagachi() {
                   ))}
                 </div>
 
-                <TomagachiWrapper
+                <TamagotchiWrapper
                   gif={active_gif}
                   isYoung={player.isYoung}
                   textMessage={textMessage}
