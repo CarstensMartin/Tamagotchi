@@ -1,6 +1,6 @@
 
 
-export default function PetSleeps(){
+ function PetSleeps(){
     let sleep = 50;
     let energy = 100
     let string = 'I want to sleep, I need some rest'
@@ -23,3 +23,5 @@ export default function PetSleeps(){
         SetPetEnergy
     }
 }
+
+module.exports = PetSleeps

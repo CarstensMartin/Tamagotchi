@@ -24,7 +24,9 @@ export default function Button({
   HugAudio,
   CurrentAudio,
   setCurrentAudio,
-  cvTips
+  cvTips,
+  showBot,
+  setShowBot
 }) {
   title = `${title.charAt(0).toUpperCase()}${title.slice(1)}`;
 
@@ -36,6 +38,12 @@ export default function Button({
       case "Dance":
         if(petDance.Energy() >= 0){
           petDance.SimulateDance()
+          if (typeof petDance.SimulateDance() === "string"){
+            setTextMessage(petDance.SimulateDance())
+          }  
+          else{
+            setHunger(petDance.SimulateDance())
+          }
         }
         setEnergy(petDance.Energy());
         CurrentAudio.pause()
@@ -81,7 +89,7 @@ export default function Button({
         break;
 
       case "Ask":
-
+        setShowBot(!showBot)
         CurrentAudio.pause()
         AskAudio.play()
         setCurrentAudio(AskAudio)

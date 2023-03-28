@@ -1,5 +1,14 @@
+import { useEffect, useState } from 'react';
 import './Tomagachi.css';
 import TomagachiWrapper from './Components/Wrapper/TomagachiWrapper'
+import StatLevel from './Components/StatLevel/StatLevel';
+import Button from './Components/Buttons/Button';
+import askSnippet from "./images/askSnippet.png"
+
+//Egg
+import eggGIF from "./gifs/Egg/Egg.gif"
+import eggHatchedGIF from "./gifs/Egg/Egg-Hatched.gif"
+import eggHatchingGIF from "./gifs/Egg/Egg-Hatching.gif"
 
 //Panda
 import drinkPandaGIF from "./gifs/Panda/Drink.gif"
@@ -48,15 +57,8 @@ import PlayMp3 from './Audios/Effects/Play.mp3'
 import SleepSnoring2Mp3 from './Audios/Effects/Sleep-Snoring2.mp3'
 
 //ShowHide
-import heart from './gifs/ShowHide/HeartFlashes.gif'
+import ArrowRight from './gifs/ShowHide/ArrowRight.gif'
 import ArrowLeft from "./gifs/ShowHide/ArrowLeft.gif"
-
-import eggGIF from "./gifs/Egg/Egg.gif"
-import eggHatchedGIF from "./gifs/Egg/Egg-Hatched.gif"
-import eggHatchingGIF from "./gifs/Egg/Egg-Hatching.gif"
-import { useEffect, useState } from 'react';
-import StatLevel from './Components/StatLevel/StatLevel';
-import Button from './Components/Buttons/Button';
 
 //Factory functions
 import PetDance from "./functions/dance";
@@ -176,6 +178,7 @@ function Tomagachi() {
   const [hunger, thirst, happiness, energy, setHunger, setThirst, setHappiness, setEnergy] = useSemiPersistentStateForStats()
   const [CurrentAudio, setCurrentAudio] = useState(new Audio())
   const [isTogamachVissible, SetisTogamachVissible] = useState(false)
+  const [showBot, setShowBot] = useState(false)
 
   const stats = {
     Hunger: {
@@ -300,7 +303,14 @@ function Tomagachi() {
   }
 
   const HandleTogamachVissible = () => {
-    isTogamachVissible ? SetisTogamachVissible(false) : SetisTogamachVissible(true)
+    isTogamachVissible ? SetisTogamachVissible(false) : SetisTogamachVissible(true);
+
+    if(isTogamachVissible){
+      document.getElementById("Tomagachi-wrapper__hide-show-button").style.right = "-50px"
+    }
+    else{
+      document.getElementById("Tomagachi-wrapper__hide-show-button").style.right = "-120px"
+    }
   }
 
   const handlePlayerSelector = (type, playerName) => {
@@ -372,6 +382,8 @@ function Tomagachi() {
                       CurrentAudio={CurrentAudio}
                       setCurrentAudio={setCurrentAudio}
                       cvTips={cvTips}
+                      showBot={showBot}
+                      setShowBot={setShowBot}
                     />
                   })}
                 </div>
@@ -384,17 +396,25 @@ function Tomagachi() {
           : ""
         }
 
-        <div className='Tomagachi-wrapper__hide-show-button' onClick={HandleTogamachVissible}>
-          <img src={isTogamachVissible ? ArrowLeft : heart} alt="gif" />
+        <div className='Tomagachi-wrapper__hide-show-button' id='Tomagachi-wrapper__hide-show-button' onClick={HandleTogamachVissible}>
+          <img src={isTogamachVissible ? ArrowLeft : ArrowRight} alt="gif" />
         </div>
 
       </div>
 
-      <a href="./test.html" target="_blank">
+      <a href="../test.html" target="_blank">
         <div className='tests-button-wrapper'>
           <span>Tests</span>
         </div>
       </a>
+
+      {showBot ? 
+        <div className='ask-pic'>
+          <img src={askSnippet} alt='pic' />
+        </div>
+        : ""
+      }
+      
     </>
 
   );

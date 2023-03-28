@@ -9,10 +9,10 @@ const PetDance = () =>{
         return (dance/100) * 100;
     };
     const SimulateDance = () => {
-        return energy >= 10 ? energy -= dance : Message();
+        return energy > 10 ? energy -= dance : Message();
     }
     const Message = () =>{
-        if(energy < 10){
+        if(energy <= 10){
             return string
         }
          

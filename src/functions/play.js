@@ -9,7 +9,7 @@ const PetPlays = () =>{
     };
 
     const SimulatePlay = () =>{
-        return Happy < 100 ? (Happy += Play , energy -= Play): string 
+        return (Happy < 100 &&  energy > 0 )? (Happy += Play , energy -= Play): string 
     };
 
     const SimulateHug = () =>{
