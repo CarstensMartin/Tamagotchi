@@ -209,7 +209,7 @@ function Tomagachi() {
     setEnergy,
   ] = useSemiPersistentStateForStats();
   const [CurrentAudio, setCurrentAudio] = useState(new Audio());
-  const [isTogamachVissible, SetisTogamachVissible] = useState(false);
+  const [isTagamotchiVissible, SetisTagamotchiVissible] = useState(true);
   const [showBot, setShowBot] = useState(false);
 
   const stats = {
@@ -270,13 +270,13 @@ function Tomagachi() {
   }, 120000);
 
   useEffect(() => {
-    if (isTogamachVissible) {
+    if (isTagamotchiVissible) {
       const img = document.querySelector("#tomagachi-gif");
       img.ondragstart = () => {
         return false;
       };
     }
-  }, [isTogamachVissible]);
+  }, [isTagamotchiVissible]);
 
   if (
     (stats.Hunger.level <= 0 ||
@@ -337,19 +337,10 @@ function Tomagachi() {
   };
 
   const HandleTogamachVissible = () => {
-    isTogamachVissible
-      ? SetisTogamachVissible(false)
-      : SetisTogamachVissible(true);
+    isTagamotchiVissible
+      ? SetisTagamotchiVissible(false)
+      : SetisTagamotchiVissible(true);
 
-    if (isTogamachVissible) {
-      document.getElementById(
-        "Tomagachi-wrapper__hide-show-button"
-      ).style.right = "-50px";
-    } else {
-      document.getElementById(
-        "Tomagachi-wrapper__hide-show-button"
-      ).style.right = "-120px";
-    }
   };
 
   const handlePlayerSelector = (type, playerName) => {
@@ -364,7 +355,7 @@ function Tomagachi() {
   return (
     <>
       <div className="Tomagachi-wrapper__parent">
-        {isTogamachVissible ? (
+        {isTagamotchiVissible ? (
           <div className="Tomagachi-wrapper" id="Tomagachi-wrapper">
             {player.isYoung || player.name === "" ? (
               <>
@@ -445,7 +436,7 @@ function Tomagachi() {
           id="Tomagachi-wrapper__hide-show-button"
           onClick={HandleTogamachVissible}
         >
-          <img src={isTogamachVissible ? ArrowLeft : ArrowRight} alt="gif" />
+          <img src={isTagamotchiVissible ? ArrowLeft : ArrowRight} alt="gif" />
         </div>
       </div>
 

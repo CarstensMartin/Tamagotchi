@@ -8,7 +8,7 @@
         return (sleep/100) * 100;
     }
     const SimulateSleep = () =>{
-        return energy > 40 ? "I am not tired" : energy < 40 ? energy += sleep : string; 
+        return energy > 50 ? "I am not tired" : energy < 50 ? energy += sleep : string; 
     }
     const PetSlept = () =>{
         return energy
