@@ -1,4 +1,42 @@
-# Getting Started with Create React App
+# Tamagotchi feature on website
+
+## The purpose of this project is to build a Tamagotchi  that will keep users engaged for longer on the website
+
+## Brief
+
+To build an animated Tamagotchi that can be named, selected, fed, hugged, made to dance, drink, sleep and ask questions, the following technical brief can be followed:
+
+Choose a programming language and platform: You will be building this project in React. Additionally, you will need to decide whether to build the game for desktop, mobile, or web platforms.
+
+Create a user interface: The next step is to create a user interface for the game. This will involve designing the game screen, the Tamagotchi character, and the various buttons and controls for feeding, hugging, dancing, drinking, sleeping, and asking questions.
+
+Implement the game logic: The game logic will determine how the Tamagotchi responds to various actions, such as feeding or hugging. For example, if the Tamagotchi is hungry, feeding it will increase its energy level. If the Tamagotchi is tired, putting it to sleep will increase its energy level.
+
+Add animations and sound effects: To make the game more engaging and entertaining, you can add animations and sound effects to the Tamagotchi's movements and actions. For example, when the Tamagotchi dances, it could play a fun music track and move in sync with the beat.
+
+Implement character selection and naming: To allow players to select a character and give it a name, you can add a character selection screen and a name input screen. The player can choose from different Tamagotchi characters and enter a name of their choice.
+
+Test and debug: Once the game has been developed, it's important to thoroughly test it to ensure that all features are working correctly and there are no bugs or glitches. You can also gather feedback from players to make improvements or add new features.
+
+## Road Map of the development
+
+<img src="./Road Map/Screenshot 1.png" width="100%"  alt="Road Map img"/>
+
+<img src="./Road Map/Screenshot 2.png" width="100%" alt="Road Map img" />
+
+<img src="./Road Map/Screenshot 3.png" width="100%" alt="Road Map img" />
+
+<img src="./Road Map/Screenshot 4.png" width="100%" alt="Road Map img" />
+
+<img src="./Road Map/Screenshot 5.png" width="100%" alt="Road Map img" />
+
+<img src="./Road Map/Screenshot 6.png" width="100%" alt="Road Map img" />
+
+<img src="./Road Map/Screenshot 7.png" width="100%" alt="Road Map img" />
+
+<img src="./Road Map/Screenshot 8.png" width="100%" alt="Road Map img" />
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
