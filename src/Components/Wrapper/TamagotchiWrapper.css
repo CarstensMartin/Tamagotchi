@@ -38,6 +38,9 @@
 .tomagachi-player-selector-wrapper {
   display: flex;
 }
+.tomagachi-player-img{
+  cursor: pointer;
+}
 .tomagachi-player-selector-wrapper div {
   height: 50px;
   width: 50px;
