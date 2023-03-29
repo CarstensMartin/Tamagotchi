@@ -10,7 +10,11 @@ const PetDance = () => {
   let dance = 10;
 
   const Energy = () => {
-    return energy;
+    if (energy < 10) {
+      return 0;
+    } else {
+      return energy;
+    }
   };
 
   const Dance = () => {

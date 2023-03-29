@@ -41,7 +41,11 @@ const PetPlays = () => {
   };
 
   const Energy = () => {
-    return energy;
+    if (energy < 10) {
+      return 0;
+    } else {
+      return energy;
+    }
   };
 
   const SetPetEnergy = (newEnergy) => {
