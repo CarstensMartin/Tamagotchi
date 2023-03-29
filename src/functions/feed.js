@@ -1,5 +1,13 @@
 const PetFeeds = () => {
-  let Hunger = Number(localStorage.getItem("tomagachi-hunger")) || 50;
+  let Hunger;
+
+  try{
+    Hunger = Number(localStorage.getItem("tomagachi-hunger")) || 50;
+  }catch(ReferenceError){
+    Hunger = 50;
+  }
+
+
 
   let Feed = 15;
   const Feeding = () => {

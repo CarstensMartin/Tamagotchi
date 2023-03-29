@@ -1,9 +1,25 @@
 const PetPlays = () => {
-  let Happy = Number(localStorage.getItem("tomagachi-happiness")) || 10;
+  let Happy; 
+  let energy;
+
+  try{
+    Happy = Number(localStorage.getItem("tomagachi-happiness")) || 10;
+  }catch(ReferenceError){
+    Happy = 10;
+  }
+
+  try{
+    energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
+  }catch(ReferenceError){
+    energy = 100;
+  }
+
+
+
   let Play = 10;
   let Hug = 5;
 
-  let energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
+
 
   const Playing = () => {
     return Happy;

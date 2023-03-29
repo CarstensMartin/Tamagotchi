@@ -1,7 +1,14 @@
 function PetSleeps() {
   let sleep = 25;
 
-  let energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
+  let energy; 
+
+  try{
+    energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
+  }catch(ReferenceError){
+    energy = 100;
+  }
+
 
   const Sleep = () => {
     return sleep;

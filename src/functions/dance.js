@@ -1,5 +1,13 @@
 const PetDance = () => {
-  let energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
+
+  let energy;
+
+  try{
+    energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
+  }catch(ReferenceError){
+    energy = 100;
+  }
+
 
   let dance = 10;
   let string = "I want to sleep, I have ran out of energy...";

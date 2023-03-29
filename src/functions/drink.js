@@ -1,5 +1,16 @@
 const PetDrinks = () => {
-  let Thirst = Number(localStorage.getItem("tomagachi-thirst")) || 100;
+
+ let Thirst; 
+
+
+
+  try{
+    Thirst = Number(localStorage.getItem("tomagachi-thirst")) || 100;
+  }catch(ReferenceError){
+    Thirst = 100;
+  }
+
+
 
   let drink = 5;
 
