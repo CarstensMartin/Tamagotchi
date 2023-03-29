@@ -423,7 +423,10 @@ function Tomagachi() {
 
       {showBot ? (
         <div className="ask-pic">
+          {/* Add a link to the ask snippet for reference to where pop up came from*/}
+          <a  href="https://www.sovtech.co.za/" target="_blank" rel="noreferrer">
           <img src={askSnippet} alt="pic" />
+          </a>
         </div>
       ) : (
         ""
