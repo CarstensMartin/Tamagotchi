@@ -37,7 +37,6 @@ export default function TamagotchiWrapper({
       } catch (TypeError) {}
     }
   }, [gif]);
-  
 
   return (
     <div className="component-wrapper">

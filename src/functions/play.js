@@ -1,5 +1,4 @@
 const PetPlays = () => {
-  
   let Happy = Number(localStorage.getItem("tomagachi-happiness")) || 10;
   let Play = 10;
   let Hug = 5;
