@@ -1,18 +1,19 @@
 function PetSleeps() {
-  let sleep = 25;
+  // Declare energy and make use of catch for ReferenceError when localStorage is not available during testing
+  let energy;
 
-  let energy; 
-
-  try{
+  try {
     energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
-  }catch(ReferenceError){
+  } catch (ReferenceError) {
     energy = 100;
   }
-
+  
+  let sleep = 25;
 
   const Sleep = () => {
     return sleep;
   };
+
   const SimulateSleep = () => {
     return energy > 70
       ? "I am not tired"
@@ -20,12 +21,15 @@ function PetSleeps() {
       ? (energy += sleep)
       : "I want to sleep, I need some rest";
   };
+
   const PetSlept = () => {
     return energy;
   };
+
   const SetPetEnergy = (newEnergy) => {
     energy = newEnergy;
   };
+
   return {
     SimulateSleep,
     Sleep,

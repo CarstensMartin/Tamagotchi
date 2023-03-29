@@ -1,46 +1,43 @@
 const PetPlays = () => {
-  let Happy; 
+  // Declare variables and make use of catch for ReferenceError when localStorage is not available during testing
+  let happy;
   let energy;
 
-  try{
-    Happy = Number(localStorage.getItem("tomagachi-happiness")) || 10;
-  }catch(ReferenceError){
-    Happy = 10;
+  try {
+    happy = Number(localStorage.getItem("tomagachi-happiness")) || 10;
+  } catch (ReferenceError) {
+    happy = 10;
   }
 
-  try{
+  try {
     energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
-  }catch(ReferenceError){
+  } catch (ReferenceError) {
     energy = 100;
   }
 
-
-
-  let Play = 10;
+  let play = 10;
   let Hug = 5;
 
-
-
   const Playing = () => {
-    return Happy;
+    return happy;
   };
 
   const SimulatePlay = () => {
-    return Happy < 100 && energy >= 10
-      ? ((Happy += Play), (energy -= Play))
+    return happy < 100 && energy >= 10
+      ? ((happy += play), (energy -= play))
       : "Yey! I am happy you played with me!";
   };
 
   const SimulateHug = () => {
-    return Happy < 100 ? (Happy += Hug) : null;
+    return happy < 100 ? (happy += Hug) : null;
   };
 
   const SimulateTimeNotHappy = () => {
-    return Happy >= 5 ? (Happy -= 5) : 0;
+    return happy >= 5 ? (happy -= 5) : 0;
   };
 
   const HappyPet = () => {
-    return Happy;
+    return happy;
   };
 
   const Energy = () => {
@@ -52,7 +49,7 @@ const PetPlays = () => {
   };
 
   const SetPetHappiness = (newHappiness) => {
-    Happy = newHappiness;
+    happy = newHappiness;
   };
 
   return {

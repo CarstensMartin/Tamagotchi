@@ -1,33 +1,33 @@
 const PetFeeds = () => {
-  let Hunger;
+  // Declare hunger and make use of catch for ReferenceError when localStorage is not available during testing
+  let hunger;
 
-  try{
-    Hunger = Number(localStorage.getItem("tomagachi-hunger")) || 50;
-  }catch(ReferenceError){
-    Hunger = 50;
+  try {
+    hunger = Number(localStorage.getItem("tomagachi-hunger")) || 50;
+  } catch (ReferenceError) {
+    hunger = 50;
   }
 
-
-
-  let Feed = 15;
+  let feed = 15;
+  
   const Feeding = () => {
-    return Hunger;
+    return hunger;
   };
 
   const SimulateFeed = () => {
-    return Hunger <= 85 ? (Hunger += Feed) : 100;
+    return hunger <= 85 ? (hunger += feed) : 100;
   };
 
   const PetFed = () => {
-    return Hunger;
+    return hunger;
   };
 
   const SimulateTimeFeed = () => {
-    return Hunger >= 2 ? (Hunger -= 2) : 0;
+    return hunger >= 2 ? (hunger -= 2) : 0;
   };
 
   const SetPetHunger = (newHunger) => {
-    Hunger = newHunger;
+    hunger = newHunger;
   };
 
   return {

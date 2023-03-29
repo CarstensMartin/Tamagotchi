@@ -1,39 +1,35 @@
 const PetDrinks = () => {
+  // Declare thirst and make use of catch for ReferenceError when localStorage is not available during testing
+  let thirst;
 
- let Thirst; 
-
-
-
-  try{
-    Thirst = Number(localStorage.getItem("tomagachi-thirst")) || 100;
-  }catch(ReferenceError){
-    Thirst = 100;
+  try {
+    thirst = Number(localStorage.getItem("tomagachi-thirst")) || 100;
+  } catch (ReferenceError) {
+    thirst = 100;
   }
-
-
 
   let drink = 5;
 
   const Thirsty = () => {
-    return Thirst;
+    return thirst;
   };
 
   const SimulateDrink = () => {
-    return Thirst <= 90 ? (Thirst += drink) : Message();
+    return thirst <= 90 ? (thirst += drink) : Message();
   };
 
   const Message = () => {
-    return Thirst <= 90
+    return thirst <= 90
       ? "I am Thristy , can I have some Juice"
       : "Thank you, I am not thirsty";
   };
 
   const SimulateTimeDrink = () => {
-    return Thirst >= 2 ? (Thirst -= 2) : 0;
+    return thirst >= 2 ? (thirst -= 2) : 0;
   };
 
   const SetPetThirst = (newThirst) => {
-    Thirst = newThirst;
+    thirst = newThirst;
   };
 
   return {

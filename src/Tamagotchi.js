@@ -67,12 +67,14 @@ import PetFeeds from "./functions/feed";
 import PetPlays from "./functions/play";
 import PetSleeps from "./functions/sleep.js";
 
+// Pet Actions
 let petDance = PetDance();
 let petDrinks = PetDrinks();
 let petFeeds = PetFeeds();
 let petPlays = PetPlays();
 let petSleeps = PetSleeps();
 
+// Audios
 let AskAudio = new Audio(AskMp3);
 let DanceAudio = new Audio(DanceMp3);
 let DrinkAudio = new Audio(DrinkMp3);
@@ -134,6 +136,7 @@ function Tomagachi() {
     petPlays.SetPetEnergy(energy);
   }, [energy]);
 
+  // Object with all the gifs
   const gifs = {
     egg: {
       unhatched: eggGIF,
@@ -204,6 +207,7 @@ function Tomagachi() {
     },
   };
 
+  // CV tips when the user clicks on the Educate button
   const cvTips = [
     "Tailor your CV to the position that you are applying for.",
     "Choose the correct CV format for the position.",
@@ -222,6 +226,7 @@ function Tomagachi() {
     "Write a cover letter to accompany your CV.",
   ];
 
+  // Function to set the intervals to reduce the levels of the pet
   function setIntervalsReduceLevels() {
     setInterval(() => {
       let simulateHungerTime = petFeeds.SimulateTimeFeed();
@@ -239,6 +244,7 @@ function Tomagachi() {
     }, 12000);
   }
 
+  // Only fire the setIntervalsReduceLevels function once to prevent exponential launching of the function in React
   if (player.type !== "" && isPlayerSelected === false) {
     setIntervalsReduceLevels();
     SetisPlayerSelected(true);
@@ -253,6 +259,7 @@ function Tomagachi() {
     }
   }, [isTagamotchiVissible]);
 
+  // If the pet is low on health, etc., change the gif to the low health gif
   if (
     (stats.Hunger.level <= 0 ||
       stats.Thirst.level <= 0 ||
@@ -413,12 +420,6 @@ function Tomagachi() {
           <img src={isTagamotchiVissible ? ArrowLeft : ArrowRight} alt="gif" />
         </div>
       </div>
-
-      <a href="../test.html" target="_blank">
-        <div className="tests-button-wrapper">
-          <span>Tests</span>
-        </div>
-      </a>
 
       {showBot ? (
         <div className="ask-pic">
