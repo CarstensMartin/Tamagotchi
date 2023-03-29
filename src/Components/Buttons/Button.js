@@ -40,7 +40,7 @@ export default function Button({
           if (typeof petDance.SimulateDance() === "string") {
             setTextMessage(petDance.SimulateDance());
           } else {
-            setHunger(petDance.SimulateDance());
+            setEnergy(petDance.SimulateDance());
           }
         }
         setEnergy(petDance.Energy());
