@@ -99,55 +99,40 @@ function Tomagachi() {
     return [player, setPlayer];
   };
 
-  const useSemiPersistentStateForStats = () => {
-    const [hunger, setHunger] = useState(
-      JSON.parse(localStorage.getItem("tomagachi-hunger")) || petFeeds.PetFed()
-    );
-    const [thirst, setThirst] = useState(
-      JSON.parse(localStorage.getItem("tomagachi-thirst")) ||
-      petDrinks.Thirsty()
-    );
-    const [happiness, setHappiness] = useState(
-      JSON.parse(localStorage.getItem("tomagachi-happiness")) ||
-      petPlays.HappyPet()
-    );
-    const [energy, setEnergy] = useState(
-      JSON.parse(localStorage.getItem("tomagachi-energy")) || petDance.Energy()
-    );
+  const [hunger, setHunger] = useState(
+    Number(localStorage.getItem("tomagachi-hunger")) || petFeeds.PetFed()
+  );
+  const [thirst, setThirst] = useState(
+    Number(localStorage.getItem("tomagachi-thirst")) || petDrinks.Thirsty()
+  );
+  const [happiness, setHappiness] = useState(
+    Number(localStorage.getItem("tomagachi-happiness")) || petPlays.HappyPet()
+  );
+  const [energy, setEnergy] = useState(
+    Number(localStorage.getItem("tomagachi-energy")) || petDance.Energy()
+  );
 
-    useEffect(() => {
-      localStorage.setItem("tomagachi-hunger", JSON.stringify(hunger));
-      petFeeds.SetPetHunger(hunger);
-    }, [hunger]);
+  useEffect(() => {
+    localStorage.setItem("tomagachi-hunger", hunger);
+    petFeeds.SetPetHunger(hunger);
+  }, [hunger]);
 
-    useEffect(() => {
-      localStorage.setItem("tomagachi-thirst", JSON.stringify(thirst));
-      petDrinks.SetPetThirst(thirst);
-    }, [thirst]);
+  useEffect(() => {
+    localStorage.setItem("tomagachi-thirst", thirst);
+    petDrinks.SetPetThirst(thirst);
+  }, [thirst]);
 
-    useEffect(() => {
-      localStorage.setItem("tomagachi-happiness", JSON.stringify(happiness));
-      petPlays.SetPetHappiness(happiness);
-    }, [happiness]);
+  useEffect(() => {
+    localStorage.setItem("tomagachi-happiness", happiness);
+    petPlays.SetPetHappiness(happiness);
+  }, [happiness]);
 
-    useEffect(() => {
-      localStorage.setItem("tomagachi-energy", JSON.stringify(energy));
-      petSleeps.SetPetEnergy(energy);
-      petDance.SetPetEnergy(energy);
-      petPlays.SetPetEnergy(energy);
-    }, [energy]);
-
-    return [
-      hunger,
-      thirst,
-      happiness,
-      energy,
-      setHunger,
-      setThirst,
-      setHappiness,
-      setEnergy,
-    ];
-  };
+  useEffect(() => {
+    localStorage.setItem("tomagachi-energy", energy);
+    petSleeps.SetPetEnergy(energy);
+    petDance.SetPetEnergy(energy);
+    petPlays.SetPetEnergy(energy);
+  }, [energy]);
 
   const gifs = {
     egg: {
@@ -198,19 +183,11 @@ function Tomagachi() {
     gifs[player.type]?.start || gifs.egg.unhatched
   );
   const [textMessage, setTextMessage] = useState("");
-  const [
-    hunger,
-    thirst,
-    happiness,
-    energy,
-    setHunger,
-    setThirst,
-    setHappiness,
-    setEnergy,
-  ] = useSemiPersistentStateForStats();
+
   const [CurrentAudio, setCurrentAudio] = useState(new Audio());
   const [isTagamotchiVissible, SetisTagamotchiVissible] = useState(true);
   const [showBot, setShowBot] = useState(false);
+  const [isPlayerSelected, SetisPlayerSelected] = useState(false);
 
   const stats = {
     Hunger: {
@@ -245,29 +222,27 @@ function Tomagachi() {
     "Write a cover letter to accompany your CV.",
   ];
 
-  let myIntervalHunger = setInterval(() => {
-    if (stats.Hunger.level > 0) {
-      setHunger((stats.Hunger.level -= 5));
-    } else {
-      clearInterval(myIntervalHunger);
-    }
-  }, 60000);
+  function setIntervalsReduceLevels() {
+    setInterval(() => {
+      let simulateHungerTime = petFeeds.SimulateTimeFeed();
+      let simulateThirstTime = petDrinks.SimulateTimeDrink();
+      localStorage.setItem("tomagachi-hunger", simulateHungerTime);
+      setHunger(simulateHungerTime);
+      localStorage.setItem("tomagachi-thirst", simulateThirstTime);
+      setThirst(simulateThirstTime);
+    }, 6000);
 
-  let myIntervalThirst = setInterval(() => {
-    if (stats.Thirst.level > 0) {
-      setThirst((stats.Thirst.level -= 5));
-    } else {
-      clearInterval(myIntervalThirst);
-    }
-  }, 60000);
+    setInterval(() => {
+      let simulateNotHappyTime = petPlays.SimulateTimeNotHappy();
+      localStorage.setItem("tomagachi-happiness", simulateNotHappyTime);
+      setHappiness(simulateNotHappyTime);
+    }, 12000);
+  }
 
-  let myIntervalHappiness = setInterval(() => {
-    if (stats.Happiness.level > 0) {
-      setHappiness((stats.Happiness.level -= 5));
-    } else {
-      clearInterval(myIntervalHappiness);
-    }
-  }, 120000);
+  if (player.type !== "" && isPlayerSelected === false) {
+    setIntervalsReduceLevels();
+    SetisPlayerSelected(true);
+  }
 
   useEffect(() => {
     if (isTagamotchiVissible) {
@@ -340,7 +315,6 @@ function Tomagachi() {
     isTagamotchiVissible
       ? SetisTagamotchiVissible(false)
       : SetisTagamotchiVissible(true);
-
   };
 
   const handlePlayerSelector = (type, playerName) => {

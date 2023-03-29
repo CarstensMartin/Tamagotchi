@@ -1,14 +1,16 @@
 
 
  function PetSleeps(){
-    let sleep = 50;
-    let energy = 100
-    let string = 'I want to sleep, I need some rest'
+    let sleep = 25;
+
+    let energy = Number(localStorage.getItem('tomagachi-energy')) || 100;
+
+
     const Sleep = ()=>{
-        return (sleep/100) * 100;
+        return sleep;
     }
     const SimulateSleep = () =>{
-        return energy > 50 ? "I am not tired" : energy < 50 ? energy += sleep : string; 
+        return energy > 70 ? "I am not tired" : energy < 70 ? energy += sleep : 'I want to sleep, I need some rest'; 
     }
     const PetSlept = () =>{
         return energy

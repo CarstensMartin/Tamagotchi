@@ -61,8 +61,8 @@ export default function Button({
 
       case "Feed":
         petFeeds.SimulateFeed()
-        if (typeof petFeeds.SimulateFeed() === "string"){
-          setTextMessage(petFeeds.SimulateFeed())
+        if (petFeeds.SimulateFeed() === 100){
+          setTextMessage('Thank you, I am not hungry')
         }  
         else{
           setHunger(petFeeds.SimulateFeed())

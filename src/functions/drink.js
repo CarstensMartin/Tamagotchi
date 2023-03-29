@@ -1,11 +1,12 @@
 const PetDrinks = () =>{
-    let Thirst = 100;
+    
+    let Thirst = Number(localStorage.getItem('tomagachi-thirst')) || 100;
+
     let drink = 5;
 
-    let string = 'I am Thristy , can I have some Juice'
 
     const Thirsty = () =>{
-        return (Thirst/100) * 100;
+        return Thirst;
     };
 
     const SimulateDrink = () =>{
@@ -13,7 +14,11 @@ const PetDrinks = () =>{
     }
 
     const Message = () =>{
-        return  Thirst <= 90 ? string : "Thank you, I am not thirsty";
+        return  Thirst <= 90 ? 'I am Thristy , can I have some Juice' : "Thank you, I am not thirsty";
+    }
+
+    const SimulateTimeDrink = () =>{
+        return( Thirst >= 2) ? (Thirst -= 2) : 0;
     }
 
     const SetPetThirst = (newThirst) => {
@@ -24,7 +29,8 @@ const PetDrinks = () =>{
         Thirsty,
         Message,
         SimulateDrink,
-        SetPetThirst
+        SetPetThirst,
+        SimulateTimeDrink
     }
 
 };

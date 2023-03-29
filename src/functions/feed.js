@@ -1,17 +1,22 @@
 const PetFeeds = () =>{
-    let Hunger = 0;
-    let Feed = 5;
-    let string = 'Thank you, I am not hungry';
+
+    let Hunger = Number(localStorage.getItem('tomagachi-hunger')) || 50;
+
+    let Feed = 15;
     const Feeding = () =>{
-        return (Hunger/100) * 100;
+        return Hunger;
     }
 
     const SimulateFeed = () =>{
-        return (Hunger <= 95 && Hunger >= 0) ? Hunger += Feed : string
+        return Hunger <= 85 ? Hunger += Feed : 100;
     }
 
     const PetFed = () =>{
         return Hunger;
+    }
+
+    const SimulateTimeFeed = () =>{
+        return( Hunger >= 2) ? (Hunger -= 2) : 0;
     }
 
     const SetPetHunger = (newHunger) => {
@@ -22,7 +27,8 @@ const PetFeeds = () =>{
         Feeding,
         SimulateFeed,
         PetFed,
-        SetPetHunger
+        SetPetHunger,
+        SimulateTimeFeed
     }
 }
 

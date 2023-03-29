@@ -1,46 +1,55 @@
-const PetPlays = () =>{
-    let Happy = 10;
-    let Play = 10;
-    let Hug = 5;
-    let energy = 100;
-    let string = "Yey! I am happy you played with me!"
-    const Playing = () =>{
-        return (Happy/100) * 100;
-    };
+const PetPlays = () => {
+  
+  let Happy = Number(localStorage.getItem("tomagachi-happiness")) || 10;
+  let Play = 10;
+  let Hug = 5;
 
-    const SimulatePlay = () =>{
-        return (Happy < 100 &&  energy > 0 )? (Happy += Play , energy -= Play): string 
-    };
+  let energy = Number(localStorage.getItem("tomagachi-energy")) || 100;
 
-    const SimulateHug = () =>{
-        return Happy < 100 ? Happy += Hug : null;
-    }
+  const Playing = () => {
+    return Happy;
+  };
 
-    const HappyPet = () =>{
-        return Happy;
-    }
+  const SimulatePlay = () => {
+    return Happy < 100 && energy >= 10
+      ? ((Happy += Play), (energy -= Play))
+      : "Yey! I am happy you played with me!";
+  };
 
-    const Energy = () =>{
-        return (energy/100) * 100;
-    };
+  const SimulateHug = () => {
+    return Happy < 100 ? (Happy += Hug) : null;
+  };
 
-    const SetPetEnergy = (newEnergy) => {
-        energy = newEnergy
-    }
+  const SimulateTimeNotHappy = () => {
+    return Happy >= 5 ? (Happy -= 5) : 0;
+  };
 
-    const SetPetHappiness = (newHappiness) => {
-        Happy = newHappiness
-    }
+  const HappyPet = () => {
+    return Happy;
+  };
 
-    return {
-        Playing,
-        SimulatePlay,
-        SimulateHug,
-        HappyPet,
-        SetPetEnergy,
-        Energy,
-        SetPetHappiness
-    }
-}
+  const Energy = () => {
+    return energy;
+  };
 
-module.exports = PetPlays
+  const SetPetEnergy = (newEnergy) => {
+    energy = newEnergy;
+  };
+
+  const SetPetHappiness = (newHappiness) => {
+    Happy = newHappiness;
+  };
+
+  return {
+    Playing,
+    SimulatePlay,
+    SimulateHug,
+    HappyPet,
+    SetPetEnergy,
+    Energy,
+    SetPetHappiness,
+    SimulateTimeNotHappy,
+  };
+};
+
+module.exports = PetPlays;
